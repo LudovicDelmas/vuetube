@@ -1,31 +1,30 @@
 <template>
-  <div class="container">
-    <h1 class="title">Log in</h1>
-    <form @submit.prevent="logIn">
-      <div class="field">
-        <div class="control">
-          <input class="input" type="email" placeholder="Email" v-model="email">
+  <div class="columns">
+    <div class="column is-4 is-offset-4">
+      <h1 class="title">Log in</h1>
+      <form @submit.prevent="logIn">
+        <div class="field">
+          <div class="control">
+            <input class="input" type="email" placeholder="Email" v-model="email">
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <div class="control">
-          <input class="input" type="password" placeholder="Password" v-model="password">
+        <div class="field">
+          <div class="control">
+            <input class="input" type="password" placeholder="Password" v-model="password">
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <div class="control">
-          <button class="button is-primary">Submit</button>
+        <div class="field">
+          <div class="control">
+            <button class="button is-success">Submit</button>
+          </div>
+          <article class="message is-danger" v-if="error">
+            <div class="message-body">
+              {{ error }}
+            </div>
+          </article>
         </div>
-      </div>
-    </form>
-    <div class="field">
-      <div class="control">
-        <button class="button is-danger" @click="logOut">Log out</button>
-      </div>
+      </form>
     </div>
-    <hr>
-    Signed in: {{ isAuthenticated }}
-
   </div>
 </template>
 
@@ -38,13 +37,15 @@ export default {
     return {
       email: '',
       password: '',
-      isAuthenticated: false
+      isAuthenticated: false,
+      error: null
     }
   },
   created () {
     firebase.auth().onAuthStateChanged(user => {
       if(user) {
         this.isAuthenticated = true
+        this.$router.push('/dashboard')
       }
     })
   },
@@ -52,13 +53,14 @@ export default {
     logIn () {
       console.log('Log in')
       firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-        .catch(error => alert(error.message))
+        .catch(error => this.error = error.message)
     },
     logOut () {
       console.log('Log out')
       firebase.auth().signOut()
         .then(() => {
           this.isAuthenticated = false
+          
         })
     }
   }

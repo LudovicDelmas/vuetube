@@ -4,7 +4,7 @@ import VueRouter from "vue-router";
 const App = () => import("../App.vue");
 const SignUp= () => import("../components/SignUp.vue");
 const LogIn = () => import("../components/LogIn.vue");
-const PageC = () => import("../components/PageC.vue");
+const Dashboard = () => import("../components/Dashboard.vue");
 
 Vue.use(VueRouter)
 
@@ -20,9 +20,9 @@ const routes = [
     component: LogIn
   },
   {
-    path: "/PageC",
-    name: "PageC",
-    component: PageC
+    path: "/dashboard",
+    name: "dashboard",
+    component: Dashboard
   }
 ];
 

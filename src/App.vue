@@ -15,15 +15,55 @@
       <div class="navbar-menu">
         <div class="navbar-start">
           <router-link to="/" class="navbar-item">Home</router-link>
-          <router-link to="/signup" class="navbar-item">Sign up</router-link>
-          <router-link to="/login" class="navbar-item">Log in</router-link>
         </div>
-
         <div class="navbar-end">
-          <!-- navbar items -->
+          <div class="navbar-item">
+            <div class="field is-grouped" v-if="!isAuthenticated">
+              <p class="control">
+                <router-link to="/signup" class="button is-primary">Sign up</router-link>
+              </p>
+              <p class="control">
+                <router-link to="/login" class="button is-info">Log in</router-link>
+              </p>
+            </div>
+            <div class="field" v-else>
+              <p class="control">
+                <button class="button" @click="logout">Log out</button>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
     <router-view/>
   </div>
 </template>
+
+<script>
+
+import firebase from 'firebase'
+
+export default {
+  data () {
+    return {
+      isAuthenticated: false
+    }
+  },
+  created () {
+    firebase.auth().onAuthStateChanged(user => {
+      if(user) {
+        this.isAuthenticated = true
+      }
+    })
+  },
+  methods: {
+    logout () {
+      firebase.auth().signOut()
+        .then(() => {
+          this.isAuthenticated = false
+          this.$router.push('/login')
+        })
+    }
+  }
+}
+</script>
