@@ -7,7 +7,7 @@
           <a href="">Newest</a>
         </li>
         <li>
-          <a v-for="(category, index) in categories" v-bind:key="index" href="">{{ category }}</a>
+          <a v-for="(category, index) in categories" v-bind:key="index" href="">{{ category.title }}</a>
         </li>
       </ul>
     </div>
@@ -15,19 +15,15 @@
 </template>
 
 <script>
-import { database } from '../main'
+import { db } from '../main'
 
-export default{
+export default {
   name: 'dashboard',
-  data () {
-    return {
-      categories: []
-    }
-  },
-  firestore () {
-    return {
-      categories: database.collection('categories')
-    }
+  data: () => ({
+    categories: []
+  }),
+  firestore: { 
+    categories: db.collection('categories')
   }
 }
 </script>

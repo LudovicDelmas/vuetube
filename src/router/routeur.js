@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueRouter from "vue-router";
 
-const App = () => import("../App.vue");
 const SignUp= () => import("../components/SignUp.vue");
 const LogIn = () => import("../components/LogIn.vue");
 const Dashboard = () => import("../components/Dashboard.vue");

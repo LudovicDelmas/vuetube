@@ -3,11 +3,12 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router/routeur'
 import store from './store/store'
-import firebase from 'firebase'
-// import VueFire from 'vuefire'
+import firebase from 'firebase/app'
+import { firestorePlugin as VueFire } from 'vuefire'
 import 'firebase/firestore'
 
-// Vue.use(VueFire)
+// Vue.config.productionTip = false;
+Vue.use(VueFire)
 
 var firebaseConfig = {
   apiKey: "AIzaSyC6oF8dYZEqa6vy2m5rstUztBkO7_Itdgw",
@@ -19,8 +20,7 @@ var firebaseConfig = {
   measurementId: "G-FMZHM4VE21"
 };
 
-firebase.initializeApp(firebaseConfig);
-export var database = firebase.database();
+export const db = firebase.initializeApp(firebaseConfig).firestore();
 
 new Vue({
   el: '#app',
