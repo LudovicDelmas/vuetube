@@ -60,7 +60,6 @@ export default {
       firebase.auth().signOut()
         .then(() => {
           this.isAuthenticated = false
-          
         })
     }
   }

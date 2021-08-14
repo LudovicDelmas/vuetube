@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import VueRouter from "vue-router";
 
-const SignUp= () => import("../components/SignUp.vue");
-const LogIn = () => import("../components/LogIn.vue");
-const Dashboard = () => import("../components/Dashboard.vue");
+const SignUp= () => import("../views/SignUp.vue");
+const LogIn = () => import("../views/LogIn.vue");
+const Dashboard = () => import("../views/Dashboard.vue");
 
 Vue.use(VueRouter)
 

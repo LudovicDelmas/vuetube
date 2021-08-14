@@ -5,7 +5,8 @@ import router from './router/routeur'
 import store from './store/store'
 import firebase from 'firebase/app'
 import { firestorePlugin as VueFire } from 'vuefire'
-import 'firebase/firestore'
+require('firebase/firestore')
+require('firebase/auth')
 
 // Vue.config.productionTip = false;
 Vue.use(VueFire)
@@ -20,7 +21,9 @@ var firebaseConfig = {
   measurementId: "G-FMZHM4VE21"
 };
 
-export const db = firebase.initializeApp(firebaseConfig).firestore();
+firebase.initializeApp(firebaseConfig)
+
+export const db = firebase.firestore();
 
 new Vue({
   el: '#app',
